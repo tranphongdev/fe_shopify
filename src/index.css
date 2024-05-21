@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: IntegralCf;
+    src: url(assets/fonts/IntegralCF/Fontspring-DEMO-integralcf-heavy.otf);
+}
+
+@font-face {
+    font-family: Satoshi;
+    src: url(assets/fonts/Satoshi/Satoshi-Medium.otf);
+}
+
+@font-face {
+    font-family: SatoshiLight;
+    src: url(assets/fonts/Satoshi/Satoshi-Light.otf);
+}
+
+:root {
+    --width-page: 1240px;
+}
+
+html {
+    font-family: SatoshiLight;
+}
+
+.wrapper {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    width: 28px !important;
+    height: 44px !important;
+    background: #d9d9d9;
+    opacity: 0.5;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 18px !important;
+    color: #000;
+}
+
+.swiper-button-prev {
+    left: 0;
+    right: auto;
+}
+.swiper-button-next {
+    right: 0;
+    left: auto;
+}
