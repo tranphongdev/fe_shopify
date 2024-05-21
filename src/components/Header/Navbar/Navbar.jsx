@@ -6,10 +6,12 @@ import { IoCartOutline } from 'react-icons/io5';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { navItems } from '../../../constants';
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef();
+    const { cartsValue } = useSelector((state) => state.allCart);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -59,9 +61,13 @@ function Navbar() {
                                 <Link to="/cart">
                                     <IoCartOutline className="w-7 h-7 mt-1" />
                                 </Link>
-                                <span className="absolute top-[-6px] right-[-14px] bg-red-600 text-xs leading-5 text-white w-5 h-5 text-center rounded-full">
-                                    2
-                                </span>
+                                {cartsValue.length > 0 ? (
+                                    <span className="absolute top-[-6px] right-[-14px] bg-red-600 text-xs leading-5 text-white w-5 h-5 text-center rounded-full">
+                                        {cartsValue.length}
+                                    </span>
+                                ) : (
+                                    ''
+                                )}
                             </div>
                             <Link to="/login" className="hidden lg:block font-[Satoshi]">
                                 Login <AiOutlineLogin className="w-6 h-6 inline-block" />

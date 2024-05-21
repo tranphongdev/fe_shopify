@@ -6,9 +6,9 @@ import calvinklein from '../assets/calvinklein.png';
 
 const navItems = [
     { title: 'Home', to: '/' },
-    { title: 'Shop', to: 'about' },
-    { title: 'About', to: 'contact' },
-    { title: 'Contact', to: 'product' },
+    { title: 'Shop', to: '/shop' },
+    { title: 'About', to: '/about' },
+    { title: 'Contact', to: '/contact' },
 ];
 
 const brands = [

@@ -22,6 +22,10 @@ function Home() {
     const productsSelling = products.slice(10);
 
     useEffect(() => {
+        window.scrollTo(0, 0); // Cuộn lên đầu trang khi id thay đổi và được load
+    }, []);
+
+    useEffect(() => {
         getData();
     }, []);
 

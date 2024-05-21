@@ -4,23 +4,28 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
 import { FaMinus } from 'react-icons/fa6';
 
-function CartItem() {
+function CartItem({ cart }) {
+    console.log(cart);
     return (
         <>
             <div className="py-5 flex">
                 <div className="flex w-[667px] gap-4">
                     <div className="w-[124px] h-[124px]">
-                        <img src={prd} alt="" className="w-full h-full object-cover rounded-[20px]" />
+                        <img
+                            src={cart?.image}
+                            alt={cart?.title}
+                            className="w-full h-full object-cover rounded-[20px]"
+                        />
                     </div>
                     <div className="flex flex-col justify-between">
-                        <h2 className="font-[Satoshi] line-clamp-1">Gradient Graphic T-shirt</h2>
+                        <h2 className="font-[Satoshi] line-clamp-1">{cart?.title}</h2>
                         <span className="font-[Satoshi] text-sm">
                             Size: <span className="text-gray-500">Large</span>
                         </span>
                         <span className="font-[Satoshi] text-sm">
                             Color: <span className="text-gray-500">Red</span>
                         </span>
-                        <span className="font-[Satoshi]">$240</span>
+                        <span className="font-[Satoshi]">${cart?.price}</span>
                     </div>
                 </div>
 
