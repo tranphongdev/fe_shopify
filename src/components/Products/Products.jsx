@@ -8,38 +8,25 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
-function Products() {
+function Products({ data }) {
     return (
         <div>
             <Swiper
                 spaceBetween={20}
                 slidesPerView={4}
                 autoplay={{
-                    delay: 3000,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
                 navigation={true}
                 modules={[Autoplay, Pagination, Navigation]}
                 className="py-3"
             >
-                <SwiperSlide className=" min-w-[200px]">
-                    <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide className=" min-w-[200px]">
-                    <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide className=" min-w-[200px]">
-                    <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide className=" min-w-[200px]">
-                    <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide className=" min-w-[200px]">
-                    <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide className=" min-w-[200px]">
-                    <ProductItem />
-                </SwiperSlide>
+                {data?.map((product) => (
+                    <SwiperSlide key={product?.id} className=" min-w-[200px]">
+                        <ProductItem product={product} />
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </div>
     );

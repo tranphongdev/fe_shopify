@@ -1,23 +1,27 @@
 import prd from '../../../assets/prd.png';
 import StarRating from '../../StarRating/StarRating';
 
-function ProductItem() {
+function ProductItem({ product }) {
     return (
         <div className="cursor-pointer overflow-hidden">
             <div className="overflow-hidden rounded-[20px]">
-                <img src={prd} alt="" className="rounded-[20px] hover:scale-[1.1] ease-in-out duration-300" />
+                <img
+                    src={product?.image}
+                    alt=""
+                    className="rounded-[20px] hover:scale-[1.1] ease-in-out duration-300 h-[287px] object-cover"
+                />
             </div>
 
             <div className="mt-4 space-y-2">
-                <h3 className="font-[Satoshi] capitalize line-clamp-2">T-shirt with tape details</h3>
+                <h3 className="font-[Satoshi] capitalize line-clamp-1">{product?.title}</h3>
                 <div className="flex gap-2">
-                    <StarRating rating={3.9} />
+                    <StarRating rating={product?.rating?.rate} />
                     <span className="font-[Satoshi]">
-                        5/ <span className="text-[rgba(0, 0, 0, 0.60)]">5</span>{' '}
+                        {product?.rating?.rate}/ <span className="text-[rgba(0, 0, 0, 0.60)]">5</span>{' '}
                     </span>
                 </div>
                 <div>
-                    <span className="font-[Satoshi] text-xl font-semibold">$240</span>
+                    <span className="font-[Satoshi] text-xl font-semibold">${product?.price}</span>
                 </div>
             </div>
         </div>

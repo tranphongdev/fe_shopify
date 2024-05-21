@@ -5,6 +5,7 @@ import { FaBars } from 'react-icons/fa';
 import { IoCartOutline } from 'react-icons/io5';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { navItems } from '../../../constants';
+import { Link, NavLink } from 'react-router-dom';
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +13,10 @@ function Navbar() {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const activeNavLink = ({ isActive }) => {
+        return isActive ? 'text-base font-[Satoshi] underline' : 'text-base font-[Satoshi]';
     };
 
     useEffect(() => {
@@ -36,29 +41,31 @@ function Navbar() {
         <nav className="py-4 bg-white">
             <div className="wrapper">
                 <div className="flex justify-between items-center gap-8">
-                    <h2 className="font-[IntegralCf] text-[24px]">FE.SHOPIFY</h2>
+                    <Link to="/" className="font-[IntegralCf] text-[24px]">
+                        FE.SHOPIFY
+                    </Link>
 
                     <ul className="hidden lg:flex space-x-12">
                         {navItems.map(({ title, to }) => (
-                            <li className="text-base font-[Satoshi]" key={to}>
+                            <NavLink to={to} className={activeNavLink} key={to}>
                                 {title}
-                            </li>
+                            </NavLink>
                         ))}
                     </ul>
 
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-[20px]">
                             <div className="relative">
-                                <button className="">
+                                <Link to="/cart">
                                     <IoCartOutline className="w-7 h-7 mt-1" />
-                                </button>
+                                </Link>
                                 <span className="absolute top-[-6px] right-[-14px] bg-red-600 text-xs leading-5 text-white w-5 h-5 text-center rounded-full">
                                     2
                                 </span>
                             </div>
-                            <button className="hidden lg:block font-[Satoshi]">
+                            <Link to="/login" className="hidden lg:block font-[Satoshi]">
                                 Login <AiOutlineLogin className="w-6 h-6 inline-block" />
-                            </button>
+                            </Link>
                         </div>
 
                         {/* Mobile menu */}
@@ -81,12 +88,14 @@ function Navbar() {
                         isMenuOpen ? 'block fixed top-0 right-0 left-0' : 'hidden'
                     }`}
                 >
-                    <h2 className="font-[IntegralCf] text-[24px] py-4 px-4">FE.SHOPIFY</h2>
+                    <Link to="/" className="font-[IntegralCf] block text-[24px] py-4 px-4">
+                        FE.SHOPIFY
+                    </Link>
                     <ul className="space-y-2 border-b font-[Satoshi]">
                         {navItems.map(({ title, to }) => (
-                            <li key={to} className="py-3 px-4 hover:bg-[#484a4b]">
-                                {title}
-                            </li>
+                            <Link to={to} key={to}>
+                                <li className="py-3 px-4 hover:bg-[#484a4b]">{title}</li>
+                            </Link>
                         ))}
                     </ul>
                     <button className="font-[Satoshi] mt-4 px-4">
