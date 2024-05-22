@@ -2,11 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import Title from '../../components/Title/Title';
 import CartItem from './CartItem/CartItem';
+import NoCart from '../../assets/nocart.svg';
 
 import { LuMoveRight } from 'react-icons/lu';
 import { deleteAllItem } from '../../redux/features/cartSlice';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Cart() {
     const dispatch = useDispatch();
@@ -78,20 +80,18 @@ function Cart() {
                                     <span className="font-[Satoshi] text-2xl">${subTotal}</span>
                                 </div>
 
-                                <button className="w-full gap-2 flex items-center justify-center py-4 px-[54px] rounded-[62px] bg-black text-white">
-                                    Go to Checkout
-                                    <LuMoveRight />
-                                </button>
+                                <Link to="/checkout">
+                                    <button className="w-full gap-2 flex items-center justify-center py-4 px-[54px] rounded-[62px] bg-black text-white">
+                                        Go to Checkout
+                                        <LuMoveRight />
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </>
                 ) : (
                     <div className="flex justify-center mb-[14rem]">
-                        <img
-                            className="text-center"
-                            src="https://lh3.googleusercontent.com/proxy/EPYDPGgGgfXeP3-wFyR25aK4Tm5DQt4S6XKXu6_XEbZY_g7NAeMKVmLK6WY4f3cNbWrgj6jR6GunaMSFuCg1J3a1qOBbXpdoBodHS9E"
-                            alt=""
-                        />
+                        <img className="text-center mt-16" src={NoCart} alt="" />
                     </div>
                 )}
             </div>
