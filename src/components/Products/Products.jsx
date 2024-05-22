@@ -15,7 +15,7 @@ function Products({ data }) {
                 spaceBetween={20}
                 slidesPerView={4}
                 autoplay={{
-                    delay: 5000,
+                    delay: 3000,
                     disableOnInteraction: false,
                 }}
                 navigation={true}
@@ -23,7 +23,7 @@ function Products({ data }) {
                 className="py-3"
             >
                 {data?.map((product) => (
-                    <SwiperSlide key={product?.id} className=" min-w-[200px]">
+                    <SwiperSlide key={product?.id} className=" min-w-[270px]">
                         <ProductItem product={product} />
                     </SwiperSlide>
                 ))}

@@ -52,3 +52,7 @@ html {
     right: 0;
     left: auto;
 }
+
+.bd {
+    border: 1px solid #eeeeee !important;
+}
