@@ -11,6 +11,8 @@ import Shop from './pages/Shop/Shop';
 import Login from './pages/Auth/Login';
 import { PrivateRouter } from './routes/PrivateRouter';
 import Checkout from './pages/Checkout/Checkout';
+import Shipping from './pages/Checkout/Shipping/Shipping';
+import Contact from './pages/Contact/Contact';
 
 function App() {
     return (
@@ -22,6 +24,8 @@ function App() {
                     <Route path="/shop" element={<Shop />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/ship" element={<Shipping />} />
+                    <Route path="/contact" element={<Contact />} />
                     <Route element={<PrivateRouter />}>
                         <Route path="/cart" element={<Cart />} />
                     </Route>
@@ -31,7 +35,7 @@ function App() {
 
             <ToastContainer
                 position="top-right"
-                autoClose={300}
+                autoClose={1000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick

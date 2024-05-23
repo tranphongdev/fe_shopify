@@ -75,7 +75,7 @@ function Cart() {
                                     <span>Delivery Fee</span>
                                     <span className="font-[Satoshi] text-red-600">$0</span>
                                 </div>
-                                <div className="flex justify-between items-center border-b-2 pb-6">
+                                <div className="flex justify-between items-center border-t-2 pt-2 pb-6">
                                     <span className="font-[Satoshi] text-lg">Total</span>
                                     <span className="font-[Satoshi] text-2xl">${subTotal}</span>
                                 </div>

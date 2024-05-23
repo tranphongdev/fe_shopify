@@ -2,6 +2,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 export const PrivateRouter = () => {
     const navigate = useNavigate();
@@ -9,6 +10,7 @@ export const PrivateRouter = () => {
 
     useEffect(() => {
         if (!user) {
+            toast.warning('Login view cart');
             navigate('/login');
         }
     }, [user, navigate]);

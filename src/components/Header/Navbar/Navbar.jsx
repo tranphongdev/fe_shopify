@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { FaAngleDown } from 'react-icons/fa6';
 
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
@@ -14,7 +15,7 @@ import { FaBars } from 'react-icons/fa';
 import { IoCartOutline } from 'react-icons/io5';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { navItems } from '../../../constants';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../redux/features/authSlice';
 
@@ -24,6 +25,7 @@ function Navbar() {
     const menuRef = useRef();
     const { cartsValue } = useSelector((state) => state.allCart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -35,6 +37,7 @@ function Navbar() {
 
     const handleLogout = () => {
         dispatch(logout());
+        navigate('/login');
     };
 
     useEffect(() => {
@@ -87,11 +90,12 @@ function Navbar() {
                             </div>
                             {user ? (
                                 <>
-                                    <Menu as="div" className="relative inline-block text-left">
+                                    <Menu as="div" className="relative hidden lg:inline-block text-left">
                                         <div>
                                             <Menu.Button className="inline-flex items-center w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900">
                                                 <FaUserLarge />
                                                 <p>{user.username}</p>
+                                                <FaAngleDown />
                                             </Menu.Button>
                                         </div>
 
@@ -193,9 +197,76 @@ function Navbar() {
                             </Link>
                         ))}
                     </ul>
-                    <button className="font-[Satoshi] mt-4 px-4">
-                        Login <AiOutlineLogin className="w-6 h-6 inline-block" />
-                    </button>
+                    {user ? (
+                        <>
+                            <Menu as="div" className="relative inline-block text-left mt-3">
+                                <div>
+                                    <Menu.Button className="inline-flex  items-center w-full justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold">
+                                        <FaUserLarge />
+                                        <p>{user.username}</p>
+                                    </Menu.Button>
+                                </div>
+
+                                <Transition
+                                    as={Fragment}
+                                    enter="transition ease-out duration-100"
+                                    enterFrom="transform opacity-0 scale-95"
+                                    enterTo="transform opacity-100 scale-100"
+                                    leave="transition ease-in duration-75"
+                                    leaveFrom="transform opacity-100 scale-100"
+                                    leaveTo="transform opacity-0 scale-95"
+                                >
+                                    <Menu.Items className="absolute left-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <div className="py-1">
+                                            <Menu.Item>
+                                                {({ active }) => (
+                                                    <Link
+                                                        to="/profile"
+                                                        className={classNames(
+                                                            active ? 'bg-gray-100 text-black' : 'text-gray-700',
+                                                            'block px-4 py-2 text-sm',
+                                                        )}
+                                                    >
+                                                        Profile
+                                                    </Link>
+                                                )}
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                                {({ active }) => (
+                                                    <Link
+                                                        to="/checkout"
+                                                        className={classNames(
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            'block px-4 py-2 text-sm',
+                                                        )}
+                                                    >
+                                                        Checkout order
+                                                    </Link>
+                                                )}
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                                {({ active }) => (
+                                                    <button
+                                                        onClick={handleLogout}
+                                                        className={classNames(
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            'block w-full px-4 py-2 text-left text-sm',
+                                                        )}
+                                                    >
+                                                        Sign out
+                                                    </button>
+                                                )}
+                                            </Menu.Item>
+                                        </div>
+                                    </Menu.Items>
+                                </Transition>
+                            </Menu>
+                        </>
+                    ) : (
+                        <Link to="/login" className="block p-4 font-[Satoshi]">
+                            Login <AiOutlineLogin className="w-6 h-6 inline-block" />
+                        </Link>
+                    )}
                 </div>
             </div>
         </nav>

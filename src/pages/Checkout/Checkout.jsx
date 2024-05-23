@@ -1,15 +1,49 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { useEffect, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
 import { FaPhone } from 'react-icons/fa';
 import Empty from '../../assets/emptycart.webp';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { deleteAllItem } from '../../redux/features/cartSlice';
 
 function Checkout() {
+    const navigate = useNavigate();
     const { cartsValue } = useSelector((state) => state.allCart);
-
     const [subTotal, setSubTotal] = useState(0);
+    const [shipImg, setShipImg] = useState(false);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        address: '',
+        city: '',
+        state: '',
+        zipCode: '',
+    });
+    const dispatch = useDispatch();
+
+    const handleSubmit = () => {
+        const { firstName, lastName, email, phone, address, city, state, zipCode } = formData;
+        if (
+            firstName === '' ||
+            lastName === '' ||
+            email === '' ||
+            phone === '' ||
+            address === '' ||
+            city === '' ||
+            state === '' ||
+            zipCode === ''
+        ) {
+            toast.error('Not Empty!');
+        } else {
+            navigate('/ship');
+            dispatch(deleteAllItem());
+        }
+    };
 
     const caculateSubTotal = () => {
         let total = 0;
@@ -17,6 +51,13 @@ function Checkout() {
             total += item.price * item.qty;
         });
         setSubTotal(total);
+    };
+
+    const handleOnChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            [name]: value,
+        });
     };
 
     useEffect(() => {
@@ -71,6 +112,9 @@ function Checkout() {
                                     <div className="grid md:grid-cols-2 gap-4">
                                         <div className="relative flex items-center">
                                             <input
+                                                value={formData.firstName}
+                                                onChange={handleOnChange}
+                                                name="firstName"
                                                 type="text"
                                                 placeholder="First Name"
                                                 className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
@@ -80,6 +124,9 @@ function Checkout() {
 
                                         <div className="relative flex items-center">
                                             <input
+                                                value={formData.lastName}
+                                                onChange={handleOnChange}
+                                                name="lastName"
                                                 type="text"
                                                 placeholder="Last Name"
                                                 className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
@@ -89,6 +136,9 @@ function Checkout() {
 
                                         <div className="relative flex items-center">
                                             <input
+                                                value={formData.email}
+                                                onChange={handleOnChange}
+                                                name="email"
                                                 type="email"
                                                 placeholder="Email"
                                                 className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
@@ -98,6 +148,9 @@ function Checkout() {
 
                                         <div className="relative flex items-center">
                                             <input
+                                                value={formData.phone}
+                                                onChange={handleOnChange}
+                                                name="phone"
                                                 type="number"
                                                 placeholder="Phone No."
                                                 className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
@@ -111,21 +164,33 @@ function Checkout() {
                                     <h3 className="text-base font-semibold text-gray-800 mb-4">Shipping Address</h3>
                                     <div className="grid md:grid-cols-2 gap-4">
                                         <input
+                                            value={formData.address}
+                                            onChange={handleOnChange}
+                                            name="address"
                                             type="text"
                                             placeholder="Address Line"
                                             className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
                                         />
                                         <input
+                                            value={formData.city}
+                                            name="city"
+                                            onChange={handleOnChange}
                                             type="text"
                                             placeholder="City"
                                             className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
                                         />
                                         <input
+                                            value={formData.state}
+                                            onChange={handleOnChange}
+                                            name="state"
                                             type="text"
                                             placeholder="State"
                                             className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
                                         />
                                         <input
+                                            value={formData.zipCode}
+                                            onChange={handleOnChange}
+                                            name="zipCode"
                                             type="text"
                                             placeholder="Zip Code"
                                             className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none"
@@ -140,6 +205,7 @@ function Checkout() {
                                             Cancel
                                         </button>
                                         <button
+                                            onClick={handleSubmit}
                                             type="button"
                                             className="rounded-md px-4 py-3 w-full text-sm font-semibold bg-gray-800 text-white hover:bg-gray-900"
                                         >

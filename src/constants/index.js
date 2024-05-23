@@ -7,8 +7,8 @@ import calvinklein from '../assets/calvinklein.png';
 const navItems = [
     { title: 'Home', to: '/' },
     { title: 'Shop', to: '/shop' },
-    { title: 'About', to: '/about' },
     { title: 'Contact', to: '/contact' },
+    { title: 'About', to: '/about' },
 ];
 
 const brands = [

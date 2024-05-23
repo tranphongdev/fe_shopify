@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { FaRegEye } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../redux/features/authSlice';
+import { toast } from 'react-toastify';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -16,11 +17,16 @@ function Login() {
         e.preventDefault();
         try {
             await dispatch(login({ username, password })).unwrap();
+            toast.success('Login successfuly!');
             navigate('/');
         } catch (error) {
             console.error('Failed to login:', error);
         }
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Cuộn lên đầu trang khi id thay đổi và được load
+    }, []);
 
     return (
         <div className="my-[200px]">
